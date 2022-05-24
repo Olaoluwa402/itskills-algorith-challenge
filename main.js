@@ -1,5 +1,5 @@
 // Bootcamp Algorithm challenge/solutions - itskills 2022
-
+const {log} = console;
 /*1. The formula to convert from Celsius to Fahrenheit is the
 temperature in Celsius times 9/5, plus 32.
 You are given a variable celsius representing a temperature in Celsius.
@@ -177,4 +177,105 @@ function convertToFahrenheit(C) {
         return newArray
     }
 
-    console.log(chucnks([0, 1, 2, 3, 4, 5], 4))
+    // console.log(chucnks([0, 1, 2, 3, 4, 5], 4))
+
+    const itCompanies = ['Facebook','Google','Microsoft','Apple','IBM','Oracle','Amazon']
+    function itCom(arr){
+        let newComp = [];
+        for(let i=0; i<arr.length; i++){
+          
+          let newA = arr[i].match(/o/gi)
+          if(!Array.isArray(newA) || (Array.isArray(newA) && newA.length == 1)){
+           newComp.push(arr[i])
+          }
+        }
+        return newComp;
+    
+    }
+
+    // console.log(itCom(itCompanies))
+
+    /*
+    
+
+Make a function that looks through an array of objects (first argument) 
+and returns an array of all objects that have matching name and value pairs (second argument). 
+Each name and value pair of the source object has to be present 
+in the object from the collection if it is to be included in the returned array.
+
+For example, if the first argument is [{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], 
+and the second argument is { last: "Capulet" }, then you must return the third object from the array (the first argument), 
+because it contains the name and its value, that was passed on as the second argument.
+
+    */
+    
+    // function whatIsInAName(collection, source) {
+    //     const {log} = console;
+    //     const keys = Object.keys(source)
+    //     const arr = [];
+       
+    //     // Only change code below this line
+    //     //  for(let i=0; i<collection.length; i++){
+    //     //     // log(collection[i])
+    //     //     for(let j=0; j<keys.length; j++){
+    //     //       // log(collection[i].hasOwnProperty(keys[j]))
+    //     //         if(collection[i].hasOwnProperty(keys[j]) && collection[i][keys[j]] === source[keys[j]]){
+    //     //             // log(collection[i][keys[j]])
+    //     //             arr.push(collection[i])
+    //     //         }
+    //     //     }
+    //     //  }
+      
+    //     // Only change code above this line
+
+    //     return arr;
+    //   }
+
+
+    function searchOut(arr, obj){
+        let objKeys = Object.keys(obj)
+        
+        return arr.filter(object => {
+            log(object['last'])
+            for(let i=0; i<objKeys.length; i++){
+                log(object[objKeys[i]] != obj[objKeys[i]])
+                   if(!object.hasOwnProperty(objKeys[i]) || object[objKeys[i]] != obj[objKeys[i]]){
+                        return false
+                   }
+            }
+            return true
+        })
+    }
+
+    log(searchOut([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet",  }))
+
+
+
+
+
+
+
+
+
+      /* 
+
+            Perform a search and replace on the sentence using the arguments provided and return the new sentence.
+
+            First argument is the sentence to perform the search and replace on.
+
+            Second argument is the word that you will be replacing (before).
+
+            Third argument is what you will be replacing the second argument with (after).
+
+            Note: Preserve the case of the first character in the original word when you are replacing it. 
+            For example if you mean to replace the word Book with the word dog, it should be replaced as Dog
+
+            Template:
+            myReplace("Let us go to the store", "store", "mall") should return the string Let us go to the mall.
+
+            myReplace("He is Sleeping on the couch", "Sleeping", "sitting") should return the string He is Sitting on the couch.
+
+            myReplace("I think we should look up there", "up", "Down") should return the string I think we should look down there.
+      */
+
+        
