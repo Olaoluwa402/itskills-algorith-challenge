@@ -208,29 +208,6 @@ and the second argument is { last: "Capulet" }, then you must return the third o
 because it contains the name and its value, that was passed on as the second argument.
 
     */
-    
-    // function whatIsInAName(collection, source) {
-    //     const {log} = console;
-    //     const keys = Object.keys(source)
-    //     const arr = [];
-       
-    //     // Only change code below this line
-    //     //  for(let i=0; i<collection.length; i++){
-    //     //     // log(collection[i])
-    //     //     for(let j=0; j<keys.length; j++){
-    //     //       // log(collection[i].hasOwnProperty(keys[j]))
-    //     //         if(collection[i].hasOwnProperty(keys[j]) && collection[i][keys[j]] === source[keys[j]]){
-    //     //             // log(collection[i][keys[j]])
-    //     //             arr.push(collection[i])
-    //     //         }
-    //     //     }
-    //     //  }
-      
-    //     // Only change code above this line
-
-    //     return arr;
-    //   }
-
 
     function searchOut(arr, obj){
         let objKeys = Object.keys(obj)
@@ -247,13 +224,7 @@ because it contains the name and its value, that was passed on as the second arg
         })
     }
 
-    log(searchOut([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet",  }))
-
-
-
-
-
-
+    // log(searchOut([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet",  }))
 
 
 
@@ -277,5 +248,95 @@ because it contains the name and its value, that was passed on as the second arg
 
             myReplace("I think we should look up there", "up", "Down") should return the string I think we should look down there.
       */
+        function searchAndReplace(str, before, after){
+                const index = str.indexOf(before)
 
+                // using regx
+                if(/^[A-Z]/.test(before)){
+                    after = after[0].toUpperCase() + after.substring(1)
+                }else{
+                    after = after[0].toLowerCase() + after.substring(1)
+                }
+
+                // log(str[index] === str[index].toUpperCase())
+                // if(str[index] === str[index].toUpperCase()){
+                //     after = after.charAt(0).toUpperCase() + after.slice(1)
+                // }else{
+                //     after = after.charAt(0).toLowerCase() + after.slice(1)
+                // }
+                // log('before', before)
+                // log('after', after)
+               return  str.replace(before, after)
+        }
+
+        // log(searchAndReplace("Let us go to the store", "store", "mall"))
         
+
+    /*
+    
+        We'll pass you an array of two numbers. Return the sum of those two numbers plus the sum of all the numbers between them. 
+        The lowest number will not always come first. For example, sumAll([4,1]) should return 10 because sum of all the numbers 
+        between 1 and 4 (both inclusive) is 10.
+
+        sumAll([1, 4]) should return 10.
+
+        sumAll([4, 1]) should return 10.
+
+        sumAll([5, 10]) should return 45.
+
+        sumAll([10, 5]) should return 45.
+    */
+
+    function sumAll(arr){
+        //  sort method
+        const sorted = arr.sort((a,b) => a-b)
+        // Math function
+        const min = Math.min(...arr)//sorted[0]
+        const max = Math.max(arr[0], arr[1])// sorted[1]
+  
+        let sum = 0
+        for(let i=min; i <= max; i++){
+                sum += i //sum = sum + i
+        }
+
+        return sum
+        
+    }
+
+    // log(sumAll([200, 1]))
+
+
+
+    /*
+        SUM ALL PRIME:
+        A prime number is a whole number greater than 1 with exactly two divisors: 1 and itself. For example, 2
+        is a prime number because it is only divisible by 1 and 2. In contrast, 4 is not prime since it is
+        divisible by 1, 2 and 4.
+
+        Rewrite sumPrimes so it returns the sum of all prime numbers that are less than or equal to num.
+
+        sumPrimes(10) should return 17.
+        sumPrimes(977) should return 73156.
+    */
+
+        // function sumPrime(num){
+        //     log(num)
+        //     // check isprime
+        //     function isPrime(num){
+        //         for(let i=2; i<=num; i++){
+        //             if(num % i == 0){
+        //                 return false
+        //             }
+        //         }
+        //         return true
+        //     }
+
+        //     let sum = 0
+        //     for(let i=2; i<=num; i++){
+        //         if(isPrime(i)){
+        //             sum = sum + i
+        //         }
+        //     }
+        //     return sum;
+        // }
+        // log(sumPrime(10))
