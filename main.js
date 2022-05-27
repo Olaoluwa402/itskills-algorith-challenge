@@ -317,26 +317,42 @@ because it contains the name and its value, that was passed on as the second arg
 
         sumPrimes(10) should return 17.
         sumPrimes(977) should return 73156.
+
+        note:We only need to check up to the square root because the square root 
+        of a number is the largest possible unique divisor.
     */
+     function sumPrime(num){
+        let sum = 0;
+        // sum all primes only
+        for(let i=2; i<num; i++){
+            if(isPrime(i)){
+                sum += i;//summ = sum + i
+            }
+        }
+        return sum
 
-        // function sumPrime(num){
-        //     log(num)
-        //     // check isprime
-        //     function isPrime(num){
-        //         for(let i=2; i<=num; i++){
-        //             if(num % i == 0){
-        //                 return false
-        //             }
-        //         }
-        //         return true
-        //     }
+            // check that number is a prime
+        function isPrime(num){
+            for (let i = 2; i < num; i++) {
+                if(num%i == 0){
+                    return false
+                }
+            }
+            return true
+        }
+     }
 
-        //     let sum = 0
-        //     for(let i=2; i<=num; i++){
-        //         if(isPrime(i)){
-        //             sum = sum + i
-        //         }
-        //     }
-        //     return sum;
-        // }
-        // log(sumPrime(10))
+     log(sumPrime(10))
+        
+
+        /*
+            Writea function that converts a string to spinal case. 
+            Spinal case is all-lowercase-words-joined-by-dashes.
+
+            Examples:
+            spinalCase("This Is Spinal Tap") should return the string this-is-spinal-tap
+            spinalCase("thisIsSpinalTap") should return the string this-is-spinal-tap
+            spinalCase("The_Andy_Griffith_Show") should return the string the-andy-griffith-show
+            spinalCase("Teletubbies say Eh-oh") should return the string teletubbies-say-eh-oh
+            spinalCase("AllThe-small Things") should return the string all-the-small-things
+        */
