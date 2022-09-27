@@ -342,7 +342,7 @@ because it contains the name and its value, that was passed on as the second arg
         }
      }
 
-     log(sumPrime(10))
+    //  log(sumPrime(10))
         
 
         /*
@@ -356,3 +356,467 @@ because it contains the name and its value, that was passed on as the second arg
             spinalCase("Teletubbies say Eh-oh") should return the string teletubbies-say-eh-oh
             spinalCase("AllThe-small Things") should return the string all-the-small-things
         */
+   
+            function spinalCase(str){
+                const regx_1 = /[\s+|_+]/g
+                const regx_2 = /([a-z])([A-Z])/g
+
+                str = str.replace(regx_2, '$1 $2')
+               
+                return str.replace(regx_1, '-').toLowerCase()
+
+            }
+
+            // log(spinalCase('AllThe-small Things'))
+
+
+
+
+    /*
+        Write a function that takes two or more arrays and returns a new array of unique values
+        in the order of the original provided arrays. In other words, all values present from all 
+        arrays should be included in their original order, but with no duplicates in the final array. 
+        The unique numbers should be sorted by their original order, but the final array 
+        should not be sorted in numerical order.
+
+        uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]) should return [1, 3, 2, 5, 4].
+        uniteUnique([1, 2, 3], [5, 2, 1]) should return [1, 2, 3, 5].
+        uniteUnique([1, 2, 3], [5, 2, 1, 4], [2, 1], [6, 7, 8]) should return [1, 2, 3, 5, 4, 6, 7, 8]
+    */
+
+        function uniteUnique(...arrs){
+        //    first solution
+            let concatArray = [];
+            let allArg = concatArray.concat(...arrs)
+            return allArg.filter((item,i) => allArg.indexOf(item) === i)
+
+           //second solution
+            // let unique = [];
+            // let concatArray = [];
+            // let allArg = concatArray.concat(...arrs)
+            // for(let i=0; i<allArg.length; i++){
+            //     if(!unique.includes(allArg[i])){
+            //         unique.push(allArg[i])
+            //     }
+            // }
+            // return unique
+
+            // 3rd solution
+            // for(let i=0; i<arrs.length; i++){
+            //     // log(arrs[i])
+            //     let secondArray = arrs[i]
+            //     for(let j=0; j<secondArray.length; j++){
+            //             // log(secondArray[j])
+            //             if(!unique.includes(secondArray[j])){
+            //                 unique.push(secondArray[j])
+            //             }
+            //     }
+            // }
+            // return unique
+
+        }
+
+        // log(uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]))
+
+
+        /*
+            DNA Pairing Pairs of DNA strands consist of protein base pairs. 
+            Base pairs are represented by the characters AT and CG, which form building blocks of 
+            the DNA double helix. The DNA strand is missing the pairing element. 
+            Write a function to match the missing base pairs for the provided DNA strand. 
+            For each character in the provided string, find the base pair character. 
+            Return the results as a 2d array.
+
+            pairElement("ATCGA") should return [["A","T"],["T","A"],["C","G"],["G","C"],["A","T"]].
+            pairElement("TTGAG") should return [["T","A"],["T","A"],["G","C"],["A","T"],["G","C"]].
+        */
+
+            // using foreach will require that you split the string to convert it to an array
+            function pairElement(str){
+                const result = [];
+                const newArr = str.split('');
+                newArr.forEach(element => {
+                    switch(element){
+                        case 'A':
+                            result.push(['A', 'T'])
+                            break;
+                        case 'T':
+                            result.push(['T', 'A'])
+                            break;
+                        case 'C':
+                            result.push(['C', 'G'])
+                            break
+                        case 'G':
+                            result.push(['G', 'C'])
+                            break
+                    }
+                });
+                return result
+            }
+            // log(pairElement("ATCGA"))
+
+                // using for loop
+            // function pairElement(str){
+            //     let pairedDNA = []
+            //     function pairBases(base){
+                   
+            //           switch(base){
+            //                 case 'A':
+            //                     pairedDNA.push(['A', 'T'])
+            //                     break;
+            //                 case 'T':
+            //                     pairedDNA.push(['T', 'A'])
+            //                     break;
+            //                 case 'C':
+            //                     pairedDNA.push(['C', 'G'])
+            //                     break
+            //                 case 'G':
+            //                     pairedDNA.push(['G', 'C'])
+            //                     break
+            //           }
+            //     }
+                   
+            //     for(let i=0; i<str.length; i++){
+            //         const singlePair = str[i];
+            //        pairBases(singlePair);
+            //     }
+            //     return pairedDNA
+
+            // }
+            // log(pairElement("ATCGA"))
+
+
+            
+/*
+Given the array arr, iterate through and remove each element starting from the first element (the 0 index) 
+until the function func returns true when the iterated element is passed through it.
+Then return the rest of the array once the condition is satisfied, otherwise, arr should be returned as an empty array.
+Examples:
+dropElements([1, 2, 3, 4], function(n) {return n >= 3;}) should return [3, 4].
+
+dropElements([0, 1, 0, 1], function(n) {return n === 1;}) should return [1, 0, 1].
+
+dropElements([1, 2, 3], function(n) {return n > 0;}) should return [1, 2, 3].
+*/
+function drop(arr, func){
+    // using findIndex
+    const index = arr.findIndex(func)
+    return arr.slice(index > 0 ? index : arr.length)
+
+    //for loop
+    // for(let i=0; i<arr.length; i++){
+    //     const item = arr[0]
+    //     log(item)
+    //     if(arr.length > 0 && func(item)){
+    //         break;
+    //     }else{
+    //         arr.shift()
+    //     }
+    // }
+    // return arr
+   
+    // while(arr.length > 0 && !func(arr[0])){
+    //     arr.shift()
+    // }
+    // return arr
+}
+
+// log(drop([1, 2, 3, 4], function(n) {return n >= 3;}))
+
+
+/*
+
+
+Find the smallest common multiple of the provided parameters that can be evenly divided by both, 
+as well as by all sequential numbers in the range between these parameters. The range will be an array of two numbers 
+that will not necessarily be in numerical order. For example, if given 1 and 3, find the smallest common multiple 
+of both 1 and 3 that is also evenly divisible by all numbers between 1 and 3. The answer here would be 6.
+
+smallestCommons([1, 5]) should return a number.
+
+smallestCommons([1, 5]) should return 60.
+
+smallestCommons([5, 1]) should return 60.
+
+smallestCommons([2, 10]) should return 2520.
+
+*/
+
+function lcm(arr){
+    log( arr.sort((a,b) => a - b))
+    const [min, max] = arr.sort((a,b) => a - b)
+    // const sorted= arr.sort((a,b) => a - b)
+    // const min = sorted[0]
+    // const max = sorted[1]
+
+    // lenght of numbers btw min max including min and max
+    let numerMultiples = max - min + 1
+    
+    // get the highest SCM
+
+        let upperBound = 1;
+    for(let i = min; i<=max; i++){
+            upperBound *= i; // upperBound = upperBound * i
+    }
+  
+    // let get all multiples 0f the max
+
+    for(let multiple = max; multiple <= upperBound; multiple += max){
+        // test all values including min and max for even divisions
+        let counts  = 0
+        for(let i = min; i <=max; i++){
+            if(multiple % i === 0){
+                counts += 1;
+            }
+        }
+
+        if(counts === numerMultiples ){
+            return multiple
+        }
+    }
+
+}
+
+// log(lcm([5,1]))
+
+ 
+/*
+   Integer Reversal
+    Given an integer, reverse the order of the digits
+*/
+function reverseInt(int){
+    const integer = parseInt(int);
+    const rev = integer.toString().split('').reverse().join('')
+    log(typeof parseInt(rev))
+    return parseInt(rev)
+}
+// log(reverseInt(123))
+
+/*
+Given a number as an input, print out every integer from 1 to that number. 
+However, when the integer is divisible by 2, print out “Fizz”; 
+when it’s divisible by 3, print out “Buzz”; when it’s divisible by both 2 and 3, print out “Fizz Buzz”.
+*/
+function FizBuzz(num){
+    let result = []
+  for(let i=1; i<=num; i++){
+     
+    //    i%2 === 0 && i%3 === 0 ? result.push('FizzBuzz') : i%3===0 ? result.push('Buzz') : i%2===0 ? result.push('Fizz') :  result.push(i)
+        if(i%2===0 && i%3 ==0){
+            result.push('FizzBuzz')
+        }else if(i % 3 === 0){
+            result.push('Buzz')
+        }else if(i% 2 === 0 ){
+            result.push('Fizz')
+        }else{
+            result.push(i)
+        }
+  }
+
+  return result
+}
+// log(FizBuzz(20))
+/*
+  Function count Vowels:
+  Given a string of words or phrases, count the number of vowels.
+*/
+
+const vowels = string => {
+    // Using Regex
+    // let testPattern = /[aeiou]/gi
+    // let count;
+    // let result = string.match(testPattern);
+    // count = result.length;
+    // return count
+
+    // Using foreach and map method
+    // let vowels = ['a', 'e', 'i', 'o', 'u']
+    // let splitedString = string.split('')
+    // let selectedVowels = []
+
+    // vowels.map(vowel => {
+    //    splitedString.forEach(string => {
+    //     if(string.toLowerCase() === vowel.toLowerCase()){
+    //         selectedVowels.push(string)
+    //     }
+    //    })
+    // })
+    // log(selectedVowels)
+    // return selectedVowels.length
+
+    let count = 0;
+    let vowels = 'aeiou'
+    for(let character of string){
+        log(character)
+        if(vowels.includes(character)){
+                count++
+        }
+    }
+    return count;
+  };
+
+//   log(vowels('integrityisamuist'))
+  
+
+// 1. Write a JavaScript function to get the first element of an array. Passing a parameter 'n' will return the first 'n' elements of the array. Go to the editor
+// Test Data :
+// console.log(first([7, 9, 0, -2]));
+// console.log(first([],3));
+// console.log(first([7, 9, 0, -2],3));
+// console.log(first([7, 9, 0, -2],6));
+// console.log(first([7, 9, 0, -2],-3));
+// Expected Output :
+// 7
+// []
+// [7, 9, 0]
+// [7, 9, 0, -2]
+// []
+
+function nElements(arr,n){
+    if(n <=0 || arr.length === 0) return [];
+    if(!n && arr.length > 0) return arr[0];
+
+    let elems = [];
+    for(let i=0; i<n; i++){
+        if(arr[i] !== undefined){
+            elems.push(arr[i]);
+        }
+    }
+    return elems;
+} 
+
+// console.log(nElements([7, 9, 0, -2],6))
+
+// 2. Write a JavaScript program which accept a number as input and insert dashes (-) between each two even numbers. For example if you accept 025468 the output should be 0-254-6-8
+
+// function dashBtwEvenNums(nums){
+//     const numString = nums.toString().split('');
+//     for(let i = x; i <numString.length; i++){
+//         if()
+//     }
+//     console.log(numString)
+// }
+
+// let n = 0254608
+// console.log(dashBtwEvenNums(n))
+
+
+/* Given an array of integers, find the pair of adjacent elements 
+that has the largest product and return that product.
+
+Example
+
+For inputArray = [3, 6, -2, -5, 7, 3], the output should be
+solution(inputArray) = 21.
+
+7 and 3 produce the largest product. */
+
+const largestAdjacentProduct = (arr) =>{
+    let products = []
+    let prevElem = arr[0];
+    for(let x = 1; x < arr.length; x++){
+        products.push(arr[x] * prevElem)
+        prevElem = arr[x];
+    }
+    
+    return Math.max(...products)
+}
+
+// console.log(largestAdjacentProduct([3, 6, -2, -5, 7, 8]))
+
+/*
+
+const returnLargest = (arr) => {
+   let args =  arr.map(item  => 
+        arr[arr.indexOf(item)] * arr[arr.indexOf(item) + 1]
+        
+    )
+    let largest = args.reduce((a, b) => Math.max(a,b))
+
+    console.log(largest)
+}
+returnLargest([3,6,-2,-5,7,3])
+*/
+
+/*
+
+    let z = -Infinity;
+    
+    for(let i = 0;i <inputArray.length;i++){
+        if(inputArray[i] * inputArray[i + 1] > z){
+            z = inputArray[i] * inputArray[i + 1]
+    }
+}
+return z
+
+}
+console.log(solution([3, 6, -2, -5, 7, 3]))
+*/
+
+/* 
+    const  adjacentElementsProduct = (inputArray) => {
+
+    //Assuming the sum index 0 and 1 is the largest
+    let theLargestProduct = inputArray[0] * inputArray[1];
+
+    for (let i = 0; i < inputArray.length; i++) {
+        //getting the sum of the next 2 numbers in the array. 
+        let theSum = inputArray[i] * inputArray[i + 1];
+        
+        if (theSum > theLargestProduct) {
+            theLargestProduct = theSum;
+        }
+    }
+    return theLargestProduct;
+}
+
+console.log(adjacentElementsProduct([3, 6, -2, -5, 7, 3]));
+*/
+
+/*
+Finding Anagrams - the problem
+
+Write a function that checks that two strings passed into the function are anagrams.
+Anagrams are words that have the same characters in the same quantity. 
+This means that two strings are anagrams if we can rearrange one to get the other.
+Here are some examples.
+
+isAnagram('listen','silent') => true
+isAnagram('rail safety','fairy tales') => true
+isAnagram('coming','income') => false
+
+*/
+
+function isAnagram(str1,str2){
+    const strLowercase_1 = str1.replace(/[^\w]/g, '').toLowerCase();
+    const strLowercase_2 = str2.replace(/[^\w]/g, '').toLowerCase();
+    console.log(strLowercase_1, strLowercase_2)
+   return strLowercase_1.split('').sort().join('') === strLowercase_2.split('').sort().join('')
+}
+
+// console.log(isAnagram('listen','silent'))
+
+function isAnagram(str1,str2){
+    const strLowercase_1 = str1.replace(/[^\w]/g, '').toLowerCase();
+    const strLowercase_2 = str2.replace(/[^\w]/g, '').toLowerCase();
+    
+
+      const a = getUniquekeys(strLowercase_1);
+      const b = getUniquekeys(strLowercase_2)   
+    
+      for(let r in a){
+            if(a[r] !== b[r]){
+                return false
+            }
+      }
+      return true
+
+    function getUniquekeys(string){
+        let objKey = {}
+        for(let item of string){
+            objKey[item] = objKey[item] + 1 || 1
+        }
+        return objKey
+    }
+}
+console.log(isAnagram('listen','silent'))
