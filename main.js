@@ -819,4 +819,138 @@ function isAnagram(str1,str2){
         return objKey
     }
 }
-console.log(isAnagram('listen','silent'))
+// console.log(isAnagram('listen','silent'))
+
+/* Write a function which takes in a string and
+  returns counts of each character in the string
+*/
+
+/* Write a function which takes in an array of numbers and
+  returns the count of unique values in the array
+*/
+
+/*  
+    Write a function which takes in an array of numbers and
+  returns a new array that doubles each item.
+
+  double([1,2,3,4,5]) => [1,4,6,8,10]
+*/
+
+function double(array){
+    let arrDoubled = []
+    //1.return array.map((num)=> num * 2)
+
+    //2.
+    for(let i = 0; i<array.length; i++){
+        arrDoubled = [...arrDoubled, array[i] * 2] // arrDoubled.push(array[i] * 2)
+    }
+     return arrDoubled;
+}
+
+// console.log(double([1,2,3,4,5]))
+
+/* 
+Given: an array containing hashes of names
+  Return: a string formatted as a list of names separated by commas except for the last two names, which should be separated by an ampersand.
+  Example:
+  list([ {name: 'Bart'}, {name: 'Lisa'}, {name: 'Maggie'} ]) => 'Bart, Lisa & Maggie'
+  list([ {name: 'Bart'}, {name: 'Lisa'} ]) => 'Bart & Lisa'
+  list([ {name: 'Bart'} ]) => 'Bart'
+  list([]) => returns ''
+*/
+
+function list(arr){
+    //chec if arr is empty and return 'no item'
+    if(arr.length === 0) return 'no item'
+
+    const names = arr.map((item) => item.name);
+
+    if(names.length === 2){
+        return names.join(' & ')
+    }else if(names.length > 2){
+        let restArr = [];
+        let lastTwoArr = [];
+        //  ['john', 'sayo', 'moji','shade'] => 'john, sayo, moji & shade'
+
+        //push everything into the array aside the last two
+        for(let i = 0; i < names.length - 2; i++){
+            restArr.push(names[i]);
+        }
+        for(let i = names.length - 2; i < names.length; i++){
+            lastTwoArr.push(names[i]);
+        }
+        
+        const restArrToString = restArr.join(', ');
+        const lastTwoArrToString = lastTwoArr.join(' & ');
+        return `${restArrToString}, ${lastTwoArrToString}`
+    }
+
+    return names.join('')
+
+}
+
+// console.log(list([ {name: 'Bart'} ]));
+
+/*   
+create a function called isIsogram that takes one argument, a word to test if its an isogram.
+Isogram is a word with no repeating letters 
+This function should return a boolean indicating whether it is an isogram(true) or not (false).
+
+Example: 
+isIsogram("Dermatoglyphics") => true
+isIsogram('andra') => false
+isIsogram('anabel') => false
+*/
+
+function isIsogram(str){
+   let strToLowerCase = str.toLowerCase();
+
+   const uniqueChar = new Set(strToLowerCase)
+   const uniqueCharToString = [...uniqueChar].join('')
+   return uniqueCharToString.length === strToLowerCase.length;
+}
+
+// console.log(isIsogram('andra'))
+
+/* 
+     Given a string, return the character that is most commonly used in the string.
+        --Examples:
+        maxChar("abccccd") => "c"
+        maxChar("aaaabbccc") => "a"
+*/
+
+ function maxChar(str){
+    const count = {};
+    for(let i of str){
+        if(count[i]){
+            count[i] = count[i] + 1
+        }else{
+            count[i] = 1
+        }
+        // oe  count[i] = count[i] + 1 || 1
+    }
+
+    let maxCountKey = '';
+    let maxCountValue = 0;
+    for(let key in count){
+        if(count[key] > maxCountValue){
+            maxCountKey = key;
+            maxCountValue = count[key];
+        }
+    }
+
+    return maxCountKey
+ }
+
+ console.log(maxChar("abccccd"))
+
+/* Write a function which will take one string argument containing characters between a-z, 
+  and should remove all repeated characters (dupliacates) in the string.
+  The function should be called removeDuplicates and return an object literal containing a 'uniques' property, 
+  which should be the sorted input string but without any duplicates or special characters.
+  The returned object should also have a 'duplicates' property which should represent the total number of duplicate characters dropped
+  For example
+  removeDuplicates('th#elex_ash?')
+  Returns
+  {uniques: 'aehlstx', duplicates: 2}
+*/
