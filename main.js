@@ -324,7 +324,7 @@ because it contains the name and its value, that was passed on as the second arg
      function sumPrime(num){
         let sum = 0;
         // sum all primes only
-        for(let i=2; i<num; i++){
+        for(let i=2; i<=num; i++){
             if(isPrime(i)){
                 sum += i;//summ = sum + i
             }
@@ -942,7 +942,7 @@ function isIsogram(str){
     return maxCountKey
  }
 
- console.log(maxChar("abccccd"))
+//  console.log(maxChar("abccccd"))
 
 /* Write a function which will take one string argument containing characters between a-z, 
   and should remove all repeated characters (dupliacates) in the string.
@@ -954,3 +954,88 @@ function isIsogram(str){
   Returns
   {uniques: 'aehlstx', duplicates: 2}
 */
+
+function removeDuplicates(str){
+    //remove special character
+        const reg = /[^a-zA-Z]+/g
+       const cleanStr = str.replace(reg, '')
+    // get unique character from str
+    const unique = [...new Set(cleanStr)].join('')
+    console.log(unique)
+    const duplicate = cleanStr.length - unique.length
+
+    return {unique: unique, duplicate:duplicate}
+
+}
+
+// console.log(removeDuplicates('th#elex_ash?'))
+
+/*  
+    write a function that performs linear search on an array of items received as arguement (first parameter). 
+    second parameter is the item to be searched.
+    Linear Search is defined as a sequential search algorithm that starts at one end 
+    and goes through each element of a list until the desired element is found, 
+    otherwise the search continues till the end of the data set. It is the easiest searching algorithm 
+    
+    example => 
+    linearSearch([1, 2, 3, 4, 5, 6, 7, 8], 6) => 6
+    linearSearch([1, 2, 3, 4, 5, 6, 7, 8], 10) => -1
+
+*/
+
+function linearSearch(arr, num){
+    console.time('linearSearch')
+     for(let i=0; i<arr.length; i++){
+        if(arr[i]===num){
+            console.timeEnd('linearSearch')
+            return arr[i]
+        }
+     }
+
+     console.timeEnd('linearSearch')
+     return -1
+    
+} 
+//0.126ms
+//console.log(linearSearch([1, 2, 3, 4, 5, 6, 7, 8,9,10,11,12,13,14,15,16,17,18,19,20], 20))
+/*  
+    write a function that performs binary search on an array of numbers received as arguement (first parameter). 
+    second parameter is the item to be searched.
+        
+    Binary Search is a searching algorithm used in a sorted array by repeatedly dividing the search interval in half. 
+    The idea of binary search is to use the information that the array is sorted and reduce the time complexity to O(Log n). 
+
+   Hint:
+    Begin with the mid element of the whole array as a search key.
+    If the value of the search key is equal to the item then return an index of the search key.
+    Or if the value of the search key is less than the item in the middle of the interval, narrow the interval to the lower half.
+    Otherwise, narrow it to the upper half.
+    Repeatedly check from the second point until the value is found or the interval is empty.
+    
+    example => 
+    binarySearch([1, 2, 3, 4, 5, 6, 7, 8], 6) => 6
+    binarySearch([1, 2, 3, 4, 5, 6, 7, 8], 10) => -1
+
+*/+
+
+function binarySearch(arr, num){
+    console.time('binarySearch')
+   const sorted = arr.sort((a,b)=> a-b);
+   let start = 0;
+   let end = sorted.length - 1;
+   let middle = Math.floor((start + end) / 2);
+  
+   while(sorted[middle] !== num && start < end){
+        if(sorted[middle] > num){
+                end = middle - 1;
+        }else{
+             start = middle + 1;
+        }
+        middle = Math.floor((start + end) / 2);
+   }
+ 
+   console.timeEnd('binarySearch');
+   return sorted[middle] === num ? sorted[middle] : -1
+
+}
+console.log(binarySearch([1, 2, 3, 4, 5, 6, 7, 8,9,10,11,12,13,14,15,16,17,18,19,20], 10)) 
